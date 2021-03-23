@@ -13,10 +13,11 @@ this case the minimum range would be 5, since that would be required for the
 tower at position 15 to reach the listener at position 20.
 """
 import math
-from typing import List
+import unittest
+import typing as t
 
 
-def determine_shortest_distance(listener: int, towers: List) -> int:
+def determine_shortest_distance(listener: int, towers: t.List) -> int:
     """ Determine the distance to the closest radio tower.
 
     Time Complexity: O(n)
@@ -29,7 +30,7 @@ def determine_shortest_distance(listener: int, towers: List) -> int:
     return min([abs(tower - listener) for tower in towers])
 
 
-def determine_min_broadcast_range(listeners: List[int], towers: List[int]) -> int:
+def determine_min_broadcast_range(listeners: t.List[int], towers: t.List[int]) -> int:
     """ Determine the minimum broadcast range to reach all listeners.
 
     Time Complexity: O(n^2)
@@ -43,7 +44,7 @@ def determine_min_broadcast_range(listeners: List[int], towers: List[int]) -> in
                 for listener in listeners])
 
 
-def determine_closest_towers(listeners: List[int], towers: List[int]) -> List:
+def determine_closest_towers(listeners: t.List[int], towers: t.List[int]) -> t.List:
     """ Determine the distance to the closest radio tower.
 
     Time Complexity: O(n)
@@ -67,7 +68,7 @@ def determine_closest_towers(listeners: List[int], towers: List[int]) -> List:
     return distances
 
 
-def determine_min_broadcast_range_2(listeners: List[int], towers: List[int]) -> int:
+def determine_min_broadcast_range_2(listeners: t.List[int], towers: t.List[int]) -> int:
     """ Determine the minimum broadcast range to reach all listeners.
 
     This version of the algorithm assumes the input is sorted.
@@ -85,3 +86,20 @@ def determine_min_broadcast_range_2(listeners: List[int], towers: List[int]) -> 
     :returns minimum broadcast range
     """
     return max(determine_closest_towers(listeners, towers))
+
+
+class Test(unittest.TestCase):
+    def test_1(self):
+        result = determine_min_broadcast_range(
+            [1, 5, 11, 20], [4, 8, 15])
+        self.assertEqual(5, result)
+
+    def test_2(self):
+        result = determine_min_broadcast_range_2(
+            [1, 5, 11, 20], [4, 8, 15])
+        self.assertEqual(5, result)
+
+
+if __name__ == '__main__':
+    unittest.main()
+
